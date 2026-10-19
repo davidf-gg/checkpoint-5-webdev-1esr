@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import axios from "axios";
+import AgenteList from "@/components/Agentelist";
 
 export default function Home(){
   const [agentes, setAgentes] = useState([])
@@ -31,13 +32,7 @@ export default function Home(){
       {carregando && <p>carregando agentes...</p>}
       {erro && <p>{erro}</p>}
       
-      {!carregando && !erro && agentes.map((agente) => (
-      <div key={agente.uuid}>
-        <h2>{agente.displayName}</h2>
-
-        <img src={agente.displayIcon} alt={agente.displayName} width="120"></img>
-      </div>  
-      ))}
+      {!carregando && !erro && (<AgenteList agentes={agentes}/>)}
     </main>
   )
   
