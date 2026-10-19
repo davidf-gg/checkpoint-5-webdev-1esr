@@ -4,6 +4,8 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import AgenteList from "@/components/Agentelist";
 import Buscaagentes from "@/components/Buscaagentes";
+import loading from "@/components/loading";
+import Msgerro from "@/components/MsgErro";
 
 export default function Home(){
   const [agentes, setAgentes] = useState([])
@@ -35,8 +37,8 @@ export default function Home(){
 
       <Buscaagentes busca={busca} setBusca={setBusca}/>
 
-      {carregando && <p>carregando agentes...</p>}
-      {erro && <p>{erro}</p>}
+      {carregando && <loading/>}
+      {erro && <MensagemErro mensagem={erro}/>}
       
       {!carregando && !erro && (<AgenteList agentes={agentesfiltrados}/>)}
     </main>
