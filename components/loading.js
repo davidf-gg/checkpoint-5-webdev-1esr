@@ -1,3 +1,3 @@
 export default function loading() {
-    return(<P>carregando agentes.....</P>)
+    return(<p>carregando agentes.....</p>)
 }

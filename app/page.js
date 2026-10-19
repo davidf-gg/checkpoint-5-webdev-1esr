@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import AgenteList from "@/components/Agentelist";
 import Buscaagentes from "@/components/Buscaagentes";
-import loading from "@/components/loading";
+import loading from "@/components/Loading";
 import Msgerro from "@/components/MsgErro";
 
 export default function Home(){
