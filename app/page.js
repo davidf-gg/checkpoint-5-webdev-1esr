@@ -3,11 +3,13 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 import AgenteList from "@/components/Agentelist";
+import Buscaagentes from "@/components/Buscaagentes";
 
 export default function Home(){
   const [agentes, setAgentes] = useState([])
   const [carregando, setCarregando] = useState(true)
   const [erro, setErro] = useState("")
+  const [busca, setBusca] = useState("")
 
   useEffect(() => {
     async function carregarAgentes() {
@@ -25,14 +27,18 @@ export default function Home(){
     carregarAgentes();
   },[]);
 
+  const agentesfiltrados = agentes.filter((agente) => agente.displayName.toLowerCase().includes(busca.toLowerCase()));
+
   return(
     <main>
       <h1>Agentes do valorant</h1>
 
+      <Buscaagentes busca={busca} setBusca={setBusca}/>
+
       {carregando && <p>carregando agentes...</p>}
       {erro && <p>{erro}</p>}
       
-      {!carregando && !erro && (<AgenteList agentes={agentes}/>)}
+      {!carregando && !erro && (<AgenteList agentes={agentesfiltrados}/>)}
     </main>
   )
   
