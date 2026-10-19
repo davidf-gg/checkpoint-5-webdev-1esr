@@ -5,6 +5,8 @@ import axios from "axios";
 
 export default function Home(){
   const [agentes, setAgentes] = useState([])
+  const [carregando, setCarregando] = useState(true)
+  const [erro, setErro] = useState("")
 
   useEffect(() => {
     async function carregarAgentes() {
@@ -13,7 +15,9 @@ export default function Home(){
         setAgentes(resposta.data.data);
       }
       catch(erro){
-        console.error("Erro ao carregar agentes", erro);
+        setErro("Erro ao carregar os agentes, Tente novamente.")
+      }finally{
+        setCarregando(false)
       }
       
     }
@@ -24,7 +28,10 @@ export default function Home(){
     <main>
       <h1>Agentes do valorant</h1>
 
-      {agentes.map((agente) => (
+      {carregando && <p>carregando agentes...</p>}
+      {erro && <p>{erro}</p>}
+      
+      {!carregando && !erro && agentes.map((agente) => (
       <div key={agente.uuid}>
         <h2>{agente.displayName}</h2>
 
